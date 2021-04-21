@@ -7,6 +7,16 @@
   <title>Document</title>
 </head>
 <style>
+  .button {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    border: none;
+    background-color: rgb(106, 163, 15);
+    border-radius: 15px;
+    color: #fff;
+    box-shadow: 2px 2px #000;
+  }
   .countstr {
     display: inline-block;
     width: 500px;
@@ -19,14 +29,14 @@
     {% csrf_token %}
     <input type="text" placeholder="학생 이름을 작성해주세요." name="username">
     <br><br>
-    <button type="submit">학생 신원 조회하기</button>
+    <button type="submit" class="button">학생 신원 조회하기</button>
   </form>
   <br><br>
   <form action="{% url 'countstr' %}" method="POST">
     {% csrf_token %}
     <textarea type="text" placeholder="글자를 적어주세요." name="countstr" class="countstr"></textarea>
     <br>
-    <button type="submit">글자 수 확인하기</button>
+    <button type="submit" class="button">글자 수 확인하기</button>
   </form>
 </body>
 </html>
