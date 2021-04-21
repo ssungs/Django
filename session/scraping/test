@@ -1,0 +1,105 @@
+import re
+import requests
+from bs4 import BeautifulSoup
+
+headers = {
+    'authority': 'movie.naver.com',
+    'sec-ch-ua': '"Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"',
+    'sec-ch-ua-mobile': '?0',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-dest': 'iframe',
+    'referer': 'https://movie.naver.com/movie/bi/mi/point.nhn?code=189075',
+    'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+    'cookie': 'NRTK=ag#all_gr#1_ma#-2_si#0_en#0_sp#0; NNB=NP3GCGTIIQFGA; NID_AUT=unqu3aaSzHU/8oc8WWBzbTuVf7nKkpD0gnRSOIqrVQdG/qDCeIbqfJQBU6tsi3e+; NID_JKL=62gM4oke7tg0EvQWFq2WwFYu7/SHpM4DAXnZ/3LEXEQ=; ASID=3b088bb300000177b042837100000061; nx_ssl=2; page_uid=hciqhdp0J14ssCKHd7Kssssstio-296887; notSupportBrowserAlert=true; NM_THUMB_PROMOTION_BLOCK=Y; NID_SES=AAABk/1L3Y6+NPJ+7qeM9DVArapZmPocNptKf00gv6db7xyBt1YbNfmnxn4r68Q/h6Rf8FVwZ+6w2hD13O1YhYdkBKBOkQYdXv9dEM8cExvHSmdqJ2CC9R0mGdCtsTKkrO7wbMSkCFOUPNzawZPPxushUc3Ee/Cchw3XOgeD6BXPi1t9IlVnHLEhOukjp+/Kp9RB2qESXiU5GfZa3B4BmcOj5NHva3ro9Emxxo0vaVQ3I7YGqPflPWn4Mjyh2eAaSbc9zqg4XsCeDFiWVCflcNfoqqtU8Vg6VUpor/e+h5V1KlGNEreI8sanJemHmvNa+WqlAOp4KQRMbmteG7lzxZWYocnQ9GorM3HDwj8ijStnbSXfhUbU6CbWhYMwnlL50m0uE6gzUR9+Q2H59A7139fAoltgOVEtldxhuANk7XAuPboLDrubBp7fWOdDy0K/evIuYwjdNXjuGcFf5EHx5M5loyIzVcGhYTQ0yyYv5sv2i2+PrE1P0358WXUByoAh9i/tosUQ5ojwEcEfRojrPZN4z1YVydokcB2IUkT2nY9xpwQQ; csrf_token=67370fd6-e90c-45b5-aec9-b59e23d83914',
+}
+
+params = (
+    ('code', '189075'),
+    ('type', 'after'),
+    ('isActualPointWriteExecute', 'false'),
+    ('isMileageSubscriptionAlready', 'false'),
+    ('isMileageSubscriptionReject', 'false'),
+)
+
+url = 'https://movie.naver.com/movie/running/current.nhn#'
+response = requests.get(url)
+response1 = requests.get('https://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn', headers=headers, params=params)
+
+html = response.text
+html1 = response1.text
+soup = BeautifulSoup(html, 'html.parser')
+soup1 = BeautifulSoup(html1, 'html.parser')
+
+a_lists = soup.select('#content > div.article > div:nth-child(1) > div.lst_wrap > ul > li > dl > dt > a')
+
+movie_array = []
+
+for a in a_lists:
+    title_code = {
+      'title' : a.text,
+      'code' : a['href'].split('?code=')[1]
+      # 'reviews' : {
+      #   'coment' : ,
+      #   'star' : 
+      # }
+    }
+    movie_array.append(title_code)
+
+
+
+
+# print(movie_array)
+
+ems = soup1.select('body > div > div > div.score_result > ul > li > div.star_score > em')
+  reviews = soup1.select_one('#_filtered_ment_{}'.format(i)).text
+
+url2 = 'https://movie.naver.com/movie/bi/mi/point.nhn?code=189075#tab'
+response2 = requests.get(url2)
+
+# 평점
+
+
+for i in range(10):
+  
+  reviews.strip('nrt')
+  reviews.strip()
+  if reviews.select_one('span > span'):
+    reviews.select_one('span > span > a')['data-src']
+
+
+
+
+
+print(ems)
+print(reviews)
+
+
+
+# 리뷰
+# array = []
+# for i in range(10):
+#   reviews = soup1.select_one('#_filtered_ment_{}'.format(i)).text
+#   # ems = soup1.select('body > div > div > div.score_result > ul > li > div.star_score > em').text
+#   regex = re.compile(r'[\n\r\t]')
+#   reviews = regex.sub("", reviews)
+#   review = {
+#     'title' : a.text,
+#     'code' : a['href'].split('?code=')[1],
+#     'reviews' : {
+#       'coment' : reviews,
+#       'star' : ems[i].text
+#     }
+#   }
+#   array.append(review)
+
+
+# print(array)
+# print(ems.text)
+
+
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .countstr {
+    display: inline-block;
+    width: 500px;
+    height: 100px;
+    text-align: left;
+  }
+</style>
+<body>
+  <h1>index</h1>
+  <form action="{% url 'verify' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" placeholder="학생 이름을 작성해주세요." name="username">
+    <button type="submit">학생 신원 조회하기</button>
+  </form>
+  <br><br>
+  <form action="{% url 'countstr' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" placeholder="글자를 적어주세요." name="countstr" class="countstr">
+    <button type="submit">글자 수 확인하기</button>
+  </form>
+</body>
+</html>
