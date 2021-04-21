@@ -27,6 +27,7 @@ def countStr(request):
     countstr = {
         'input_string': '{}'.format(request.POST['countstr']),
         'count_all_string': len(request.POST['countstr']),
-        'count_string': len(''.join(request.POST['countstr'].split(' ')))
+        'count_string': len(''.join(request.POST['countstr'].split(' '))),
+        'count_paragraph': len(request.POST['countstr'].split(' '))
     }
     return render(request, 'count.html', countstr)
