@@ -11,7 +11,6 @@
     display: inline-block;
     width: 500px;
     height: 100px;
-    text-align: left;
   }
 </style>
 <body>
@@ -24,7 +23,8 @@
   <br><br>
   <form action="{% url 'countstr' %}" method="POST">
     {% csrf_token %}
-    <input type="text" placeholder="글자를 적어주세요." name="countstr" class="countstr">
+    <textarea type="text" placeholder="글자를 적어주세요." name="countstr" class="countstr"></textarea>
+    <br>
     <button type="submit">글자 수 확인하기</button>
   </form>
 </body>

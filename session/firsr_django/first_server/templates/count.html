@@ -6,10 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<style>
+  .parent {
+    position: relative;
+  }
+  .child {
+    position: absolute;
+  }
+  .last {
+    left: 200px;
+  }
+  .count {
+    color: blue;
+  }
+  .result {
+    top: 80px;
+  }
+  .input_string {
+    font-weight: 300;
+    padding-left: 20px;
+  }
+  .remove {
+    color: red;
+  }
+</style>
 <body>
   <h1>Result</h1>
-  공백 포함 글자 수는 {{count_all_string}}자 입니다.
-  <br><br>
-  공백 제외 글자 수는 {{count_string}}자 입니다.
+  <div class="parent">
+    <div class="first child">
+      <strong class="count_all_str">공백 포함 글자 수</strong>
+      <div class="count all_str">{{count_all_string}}자</div>
+    </div>
+    <div class="last child">
+      <strong class="count_str">공백 제외 글자 수</strong>
+      <div class="count str">{{count_string}}자</div>
+    </div>
+    <div class="result child">
+      <strong class="count_str">입력하신 글자는 : <span class="input_string">{{input_string}}</span></strong>
+      <br>
+      <em>(공백은 <span class="remove">한번만</span> 적용 되었습니다.)</em>
+    </div>
+  </div>
 </body>
 </html>
