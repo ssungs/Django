@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>practice django</title>
 </head>
 <style>
   .button {
@@ -15,7 +15,7 @@
     background-color: rgb(106, 163, 15);
     border-radius: 15px;
     color: #fff;
-    box-shadow: 2px 2px #000;
+    box-shadow: 3px 3px #aaa;
   }
   .countstr {
     display: inline-block;
@@ -24,7 +24,7 @@
   }
 </style>
 <body>
-  <h1>index</h1>
+  <h1>Check</h1>
   <form action="{% url 'verify' %}" method="POST">
     {% csrf_token %}
     <input type="text" placeholder="학생 이름을 작성해주세요." name="username">
