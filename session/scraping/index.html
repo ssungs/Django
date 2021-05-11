@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>세나2 쿠폰 자동등록</title>
+</head>
+<body>
+<span>회원 번호 : </span><input type="text" id="uid">
+<button onclick="req();">쿠폰 사용</button>
+<a target="_blank" rel="noopener noreferrer" href="https://forum.netmarble.com/sk2/view/13/746266">회원 번호 확인 법</a>
+<hr>
+<span>쿠폰 코드 수정 가능.</span><br><br>
+<span>회원 정보 쿠키 저장.</span><br><br>
+<span>4/22 : EVANVSRUDY, DARKBLACKSHANE, LUCKYTICKET, MAINSENA2, JAEMI2TH, PUKISENA, KEKEEVAN, PRETTYCOCO, CUTYCOCO 추가</span><br><br>
+<a target="_blank" rel="noopener noreferrer" href="https://forum.netmarble.com/sk2/view/27/786337">코드 출처 : 마스터냥이</a><br>
+
+
+<div id="example-table"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://unpkg.com/tabulator-tables@4.1.4/dist/css/tabulator.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.1.4/dist/js/tabulator.min.js"></script>
+
+<script>
+    function setCookie(cookie_name, value, days) {
+      var exdate = new Date();
+      exdate.setDate(exdate.getDate() + days);
+
+      var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+      document.cookie = cookie_name + '=' + cookie_value;
+    }
+
+    function getCookie(cookie_name) {
+      var x, y;
+      var val = document.cookie.split(';');
+
+      for (var i = 0; i < val.length; i++) {
+        x = val[i].substr(0, val[i].indexOf('='));
+        y = val[i].substr(val[i].indexOf('=') + 1);
+        x = x.replace(/^\s+|\s+$/g, '');
+        if (x == cookie_name) {
+          return unescape(y);
+        }
+      }
+
+      return null
+    }
+
+    let uid = getCookie('uid')
+
+    if(uid){$('#uid').val(uid)}
+
+    var tabledata = [
+      {'id': '1', 'code': 'SENAYAHO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '2', 'code': 'GOGOSENA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '3', 'code': 'danjangnimluv', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '4', 'code': 'COMINGSOON', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '5', 'code': 'kingadel', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '6', 'code': 'BIGUPDATE', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '7', 'code': 'NEWSCENARIO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '8', 'code': 'DUDUDUNGA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '9', 'code': 'legendsena', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '10', 'code': 'gumankm', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '11', 'code': 'VELVET', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '12', 'code': 'EVENTMATJIB', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '13', 'code': 'EVAN', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '14', 'code': '8RAID8', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '15', 'code': '4RAID4', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '16', 'code': 'dugudugu', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '17', 'code': 'LADY', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '18', 'code': 'WOWSENA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '19', 'code': 'LADYKILLER', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '20', 'code': 'oneshot', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '21', 'code': 'KEEEEE', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '22', 'code': '\u200bImsohot', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '23', 'code': 'Happycoco', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '24', 'code': 'Reinforce', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '25', 'code': 'OLDRUDY', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '26', 'code': 'update', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '27', 'code': 'senaforever', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '28', 'code': 'SEYAHO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '29', 'code': 'sknights2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '30', 'code': 'HISENA2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '31', 'code': '7infinite7', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '32', 'code': 'tpqmsskdlcm2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '33', 'code': 'GREATEVENT', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '34', 'code': '2SEVEN2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '35', 'code': 'SK2FORUM', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '36', 'code': 'senainssa', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '37', 'code': '2S2E2V2E2N', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '38', 'code': 'cocojoa', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '39', 'code': 'CHECKCHECK', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '40', 'code': '2STHGINNEVES', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '41', 'code': 'SENAMOON', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '42', 'code': 'KEKESENA2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '43', 'code': 'SENAGA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '44', 'code': '7S7E7V7E7N', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '45', 'code': 'guildsuccess', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '46', 'code': 'STRONGROCK', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '47', 'code': 'SK2ARENA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '48', 'code': 'EVANKARIN', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '49', 'code': '2SENA2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '50', 'code': 'BOSSKING', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '51', 'code': 'SENA2AGGYOJUSEYO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '52', 'code': 'JUSEYO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '53', 'code': 'ANAWIFI', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '54', 'code': 'UHPRETTY', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '55', 'code': 'GIVEMEGIFT', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '56', 'code': 'BIGBIGEVENT', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '57', 'code': 'SENA2YEONHEE', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '58', 'code': 'FROMCOCO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '59', 'code': 'SENA2LENE', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '60', 'code': 'AYAAPAYO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '61', 'code': 'SENA2GUIDE', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '62', 'code': 'SENA2RUDY', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '63', 'code': 'LUVCOCO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '64', 'code': 'INFINITYWAR', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '65', 'code': '77infinite77', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '66', 'code': 'GREATSENA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '67', 'code': 'BONBUJANGNIM', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '68', 'code': 'SPECIALTICKET', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '69', 'code': 'JJANGSENA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '70', 'code': 'HAPPYSENAS2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '71', 'code': 'SENA2KING', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '72', 'code': 'PLAYSENATWO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '73', 'code': 'SENA2DOWN', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '74', 'code': 'RUNSENA2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '75', 'code': 'senaddabong', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '76', 'code': 'SENA2LUCKY', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '77', 'code': 'SENA2DERUWA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '78', 'code': 'luckyticket', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '79', 'code': 'evanvsrudy', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '80', 'code': 'darkblackshane', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '81', 'code': 'Mainsena2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '82', 'code': 'JAEMI2TH', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '83', 'code': 'gomawayos2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '84', 'code': 'PRETTYCOCO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '85', 'code': 'CUTYCOCO', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '86', 'code': 'KEKEEVAN', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '87', 'code': 'SIDANEUNGEOJI', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '88', 'code': '7KNIGHTS2', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '89', 'code': 'GOGOYOEMYEONG', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '90', 'code': 'PUKISENA', 'result': 0, 'response': '', 'description': '요청 전'},
+      {'id': '91', 'code': 'SENA2JOA', 'result': 0, 'response': '', 'description': '요청 전'},
+    ];
+
+    function req() {
+        var uid = $('#uid').val()
+        setCookie('uid', uid)
+        for (var a in tabledata) {
+            let i = a
+            $.ajax({
+                type: 'POST',
+                url: 'https://couponview.netmarble.com/coupon/sknightsmmo/1290/apply',
+                data: {
+                    'pid': uid,
+                    'channelCode': 100,
+                    'couponCode': tabledata[i]['code'],
+                    'worldId': '',
+                    'nickname': ''
+                },
+                success: function (data) {
+                    if (data['resultCode'] === 'SUCCESS') {
+                        tabledata[i]['result'] = 1
+                        tabledata[i]['description'] = data['rewardItem']['rewardTitle']
+                    } else if (data['resultCode'] === 'NOT_EXISTS_PID') {
+                        tabledata[i]['description'] = '회원번호 오류'
+                    } else if (data['resultCode'] === 'COUPON_ALREADY_USE') {
+                        tabledata[i]['description'] = '이미 사용한 쿠폰'
+                    } else if (data['resultCode'] === 'COUPON_WRONG') {
+                        tabledata[i]['description'] = '잘못된 쿠폰 코드'
+                    } else {
+                        tabledata[i]['description'] = '나도 모르는 응답코드'
+                    }
+                    tabledata[i]['response'] = data['resultCode']
+                    table.updateData(tabledata)
+                }
+            })
+        }
+    }
+
+    var table = new Tabulator("#example-table", {
+      data: tabledata,           //load row data from array
+      reactiveData: true,
+      layout: "fitDataFill",      //fit columns to width of table
+      responsiveLayout: "hide",  //hide columns that dont fit on the table
+      tooltips: true,            //show tool tips on cells
+      addRowPos: "top",          //when adding a new row, add it to the top of the table
+      history: true,             //allow undo and redo actions on the table
+      movableColumns: true,      //allow column order to be changed
+      resizableRows: true,       //allow row order to be changed
+      columns: [                 //define the table columns
+          {title: "No", field: "id", width: 70, editor: false},
+          {title: "Code", field: "code", width: 300, editor: "input"},
+          {
+              title: "status",
+              field: "result",
+              width: 90,
+              hozAlign: "center",
+              formatter: "tickCross",
+              sorter: "boolean",
+              editor: false
+          },
+          {title: "response", field: "response", width: 180, editor: false},
+          {title: "설명", field: "description", width: 300, editor: false},
+      ],
+  });
+</script>
+</body>
+</html>

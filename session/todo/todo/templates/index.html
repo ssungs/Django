@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block header %}
+<style>
+  div {
+    font-size: 20px;
+  }
+</style>
+{% endblock header %}
+{% block list %}
+<form action="{% url 'add' %}" method="POST">
+  {% csrf_token %}
+  <input type="text" placeholder="할 일을 입력하세요" name="todolist">
+  <a href="{% url 'add' %}">
+    <button type="submit">입력</button>
+  </a>
+</form>
+  {% for todo_list in todo_lists %}
+  <span>{{todo_list.todolist}}</span>
+  <span>{{todo_list.pk}}</span>
+  <a href="{% url 'edit' todo_list.pk %}">수정하기</a>
+  <a href="{% url 'complete' todo_list.pk %}">입력</a>
+  <a href="{% url 'delete' todo_list.pk %}">삭제하기</a>
+  <br>
+  {% endfor %}
+{% block todo-list %}
+{% endblock todo-list %}
+{% endblock list %}

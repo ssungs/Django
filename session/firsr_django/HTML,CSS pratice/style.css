@@ -1,0 +1,79 @@
+* { 
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif'; 
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid red;
+  border-radius: 5px;
+  width: 220px;
+  height: 80px;
+}
+.items {  
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: red;
+  margin: 2px;
+}
+.container1 {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 200px;
+  height: 200px;
+}
+.container2 {
+  display: flex;
+  justify-content: flex-start;
+  width: 500px;
+  /* border: 1px solid red; */
+}
+.container3 {
+  display: flex;
+  justify-content: center;
+  width: 500px;
+}
+.container4 { 
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+}
+
+.main { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text {
+  padding: 10%;
+}
+.bank-lists { 
+  padding: 5%; 
+  list-style-type: none;
+}
+.bank { 
+  width: 400px;
+  height: 60px;
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 0 30px 60px 12px rgba(0, 0, 33, 0.05), 0 4px 24px 0 rgba(0, 0, 33, 0.05), 0 0 1px 0 rgba(0, 0, 33, 0.09);
+  /* border: 1px solid red; */
+  margin: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.bank-name {  
+  flex-grow: 3;
+}
+.bank-img { 
+  padding: 10px 5px 10px 10px;
+  width: 30px;
+  height: 30px;
+}
+.money {  
+  padding-right: 10px;
+}

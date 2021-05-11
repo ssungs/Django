@@ -5,24 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>practice django</title>
+  <style>
+    .button {
+      display: inline-block;
+      width: 150px;
+      height: 50px;
+      border: none;
+      background-color: rgb(106, 163, 15);
+      border-radius: 15px;
+      color: #fff;
+      box-shadow: 3px 3px #aaa;
+    }
+    .countstr {
+      display: inline-block;
+      width: 500px;
+      height: 100px;
+    }
+  </style>
 </head>
-<style>
-  .button {
-    display: inline-block;
-    width: 150px;
-    height: 50px;
-    border: none;
-    background-color: rgb(106, 163, 15);
-    border-radius: 15px;
-    color: #fff;
-    box-shadow: 3px 3px #aaa;
-  }
-  .countstr {
-    display: inline-block;
-    width: 500px;
-    height: 100px;
-  }
-</style>
 <body>
   <h1>Check</h1>
   <form action="{% url 'verify' %}" method="POST">
