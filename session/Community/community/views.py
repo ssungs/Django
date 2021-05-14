@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 # from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from .models import Category, Article, UserPro
+from .models import Category, Article, UserPro, Comment, Like
 from django.contrib import auth
 
 # Create your views here.
@@ -39,11 +39,13 @@ def category(request, category_pk) :
 def article(request, article_pk) :
     article = get_object_or_404(Article, pk=article_pk)
 
+    comments = Comment.objects.filter(article=article)
     return render(
         request,
         'article.html',
         {
-            'article': article
+            'article': article,
+            'comments': comments
         }
     )
 
@@ -56,7 +58,6 @@ def back(request, article_pk):
     category_pk = article.category.pk
 
     return redirect('category', category_pk)
-
 
 def add(request) :
     categories = Category.objects.all()
@@ -95,9 +96,8 @@ def add1(request, category_pk):
 
     category = Category.objects.filter(pk=category_pk).first()
 
-    target_category = get_object_or_404(Category, pk=category_pk)
-
-    target_user = UserPro.objects.filter()
+    target_user = UserPro.objects.get(user=request.user)
+    # print(target_user)
 
     context = {
         'category' : category,
@@ -117,9 +117,10 @@ def add1(request, category_pk):
             article = Article.objects.create(
                 title=title,
                 content=content,
-                category=target_category,
-                name=target_user.
+                category=category,
+                writer=target_user
             )
+            # print(article)
             return redirect('article', article.pk)
         
         else :
@@ -127,7 +128,6 @@ def add1(request, category_pk):
             context['error']['msg'] = '모든 항목을 채워주세요'
 
     return render(request, 'add1.html', context)
-
 
 def signup(request):
     
@@ -208,13 +208,13 @@ def login(request):
         user = User.objects.filter(username=userid)
 
         if (not userid) and (not password):
-            print(2)
+            # print(2)
             context['error']['state'] = True
             context['error']['msg'] = '아이디나 비밀번호를 입력하세요.'
             return render(request, 'login.html', context)
      
         if len(user) == 0:
-            print(3)
+            # print(3)
             context['error']['state'] = True
             context['error']['msg'] = '존재하지 않는 아이디 입니다.'
             return render(request, 'login.html', context)
@@ -266,9 +266,58 @@ def login(request):
 
     return render(request, 'login.html', context)
 
-
 def logout(request):
 
     auth.logout(request)
 
     return redirect('index')
+
+def comment(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    user = UserPro.objects.get(user=request.user)
+    content = request.POST['comment']
+    # pk = article_pk
+    # try:
+    #     pass
+    # if not content:
+    #     context = {
+    #         'state': True,
+    #         'msg': '내용을 입력하세요.'
+    #     }
+    #     return render(request, 'article.html', context)
+
+    # except IntegrityError:
+    #     pass
+
+    Comment.objects.create(
+        article = article,
+        writer = user,
+        content = content,
+        # pk = pk
+    )
+    return redirect('article', article_pk)
+
+def writer(request, writer_pk):
+
+    user = Comment.objects.get(writer_pk=writer_pk)
+    
+    my_comments = Comment.objects.filter(writer__user=user)
+    
+    content = {
+        'user': user,
+        'my_comments': my_comments
+    }
+    return render(request, 'writer.html', content)
+
+def like(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    user = UserPro.objects.get(user=request.user)
+    comment = Comment.objects.get(writer=request.user)
+    # like = Like.objects.filter(user=user).first()
+    print(like)
+    Like.objects.create(
+        article = article,
+        user = user,
+        comment = comment
+    )
+    return redirect('article', article_pk)

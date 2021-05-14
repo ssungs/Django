@@ -31,4 +31,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
+    path('comment/<int:article_pk>', views.comment, name='comment'),
+    path('writer/<int:writer_pk>', views.writer, name='writer'),
+    path('like/<int:article_pk>', views.like, name='like'),
 ]

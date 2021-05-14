@@ -9,7 +9,28 @@
 <body>
   <h1>{{article.title}}</h1>
     <p>내용 : {{article.content}}</p>
-    <p>작성자 : {{my_article}}</p>
+    <p>작성자 : {{article.writer.name}}</p>
+    <ul>
+      {% for comment in comments %}
+      <li style="list-style-type: none;">
+        <p>작성자: <a href="{% url 'writer' comment.writer.pk %}">{{comment.writer}}</a></p>
+        <p>{{comment.content}}</p>
+        <br>
+        <form action="{% url 'like' article.pk %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">좋아요</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if context.state %}
+    {{context.msg}}
+    {% endif %}
+    <form action="{% url 'comment' article.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="댓글을 작성하세요" name="comment">
+      <button type="submit">작성하기</button>
+    </form>
     <a href="{% url 'back' article.pk %}">돌아가기</a>
 </body>
 </html>
